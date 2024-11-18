@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile | SomeSpace</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="bg-gray-100">
+  <header class="bg-white shadow">
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex items-center">
+      <img src="/images/somespace-logo-v2.png" class="w-24 h-24  justify-self-center mb-4 p-4">
+      <h1 class="text-3xl font-bold text-gray-900">Your profile</h1>
+    </div>
+  </header>
+  <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <div class="flex items-center space-x-4">
+        <img src="/images/avatar-small.jpg" alt="Profile Image" class="w-24 h-24 rounded-full">
+        <div>
+          <h2 class="text-2xl font-bold">Username</h2>
+          <button
+            class="mt-2 bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Follow</button>
+        </div>
+      </div>
+      <div class="mt-6">
+        <h3 class="text-xl font-bold mb-4">Followers / Following</h3>
+        <div class="flex space-x-8">
+          <div>
+            <h4 class="text-lg font-semibold">Followers</h4>
+            <p class="text-gray-600">123</p>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold">Following</h4>
+            <p class="text-gray-600">456</p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-6">
+        <h3 class="text-xl font-bold mb-4">User Posts</h3>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <!-- Example User Post -->
+          <div class="bg-white p-4 rounded-lg shadow">
+            <img src="https://via.placeholder.com/150" alt="Post Thumbnail"
+              class="w-full h-32 object-cover rounded-md mb-4">
+            <h2 class="text-lg font-bold">Post Title</h2>
+            <p class="text-gray-600">Post description goes here...</p>
+          </div>
+          <!-- Add more user posts as needed -->
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
