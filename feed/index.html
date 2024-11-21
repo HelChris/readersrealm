@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feed</title>
+  <title>Feed | ReadersRealm</title>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -12,77 +12,115 @@
   <link rel="stylesheet" href="/css/style.css">
   <script src="../scripts/index.js" defer></script>
 </head>
+<header class="bg-white shadow">
+  <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8 flex justify-between items-end">
+    <div class="flex items-end">
+      <img src="/images/readersrealm-logov3.png" class="h-24">
+    </div>
+    <div>
+      <nav class="flex  space-x-4">
+        <a href="#" class="active text-gray-600 hover:text-gray-900">Feed</a>
+        <a href="../profile/index.html" class="text-gray-600 hover:text-gray-900">Profile</a>
+        <a href="../index.html" class="text-gray-600 hover:text-gray-900">Sign out</a>
+      </nav>
+    </div>
+  </div>
+</header>
 
-<body class="bg-gray-100">
-  <header class="bg-white shadow">
-    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex items-center">
-      <img src="/images/somespace-logo-v2.png" class="w-24 h-24  justify-self-center mb-4 p-4">
-      <h1 class="text-3xl font-bold text-gray-900">Feed</h1>
-    </div>
-  </header>
-  <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-    <div class="mb-4">
-      <input type="text" placeholder="Search posts..."
-        class="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-    </div>
-    <div class="mb-4 flex justify-between items-center">
-      <div>
-        <label for="sort" class="block text-sm font-medium text-gray-700">Sort by:</label>
-        <select id="sort" name="sort"
-          class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-          <option>Date</option>
-          <option>Popularity</option>
-          <option>Comments</option>
-        </select>
-      </div>
-      <button id="new-post-button"
-        class="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">New
-        Post</button>
-    </div>
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      <!-- Example Post Thumbnail -->
-      <div class="bg-white p-4 rounded-lg shadow sm:max-w-md md:max-w-lg mx-auto">
-        <img src="https://via.placeholder.com/150" alt="Post Thumbnail"
-          class="w-full h-32 object-cover rounded-md mb-4">
-        <h2 class="text-lg font-bold">Second post</h2>
-        <p class="text-gray-600">The second post is here, can you believe it??</p>
-      </div>
-      <div class="bg-white p-4 rounded-lg shadow sm:max-w-md md:max-w-lg mx-auto">
-        <img src="https://via.placeholder.com/150" alt="Post Thumbnail" class="w-full h-32 object-cover rounded-md mb-4">
-        <h2 class="text-lg font-bold">Second post</h2>
-        <p class="text-gray-600">The second post is here, can you believe it??</p>
-      </div>
-      <div class="bg-white p-4 rounded-lg shadow sm:max-w-md md:max-w-lg mx-auto">
-        <img src="https://via.placeholder.com/150" alt="Post Thumbnail" class="w-full h-32 object-cover rounded-md mb-4">
-        <h2 class="text-lg font-bold">Second post</h2>
-        <p class="text-gray-600">The second post is here, can you believe it??</p>
-      </div>
+<main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
 
-
-      <!-- Add more post thumbnails as needed -->
+  <div class="mb-4">
+    <input type="text" placeholder="Search posts..."
+      class="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-teal-600 focus:border-teal-600">
+  </div>
+  <div class="mb-4 flex justify-between items-center">
+    <div>
+      <label for="sort" class="block text-sm font-medium text-gray-700">Sort by:</label>
+      <select id="sort" name="sort"
+        class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-teal-600 focus:border-teal-600 sm:text-sm rounded-md">
+        <option>Newest</option>
+        <option>Rating</option>
+        <option>Likes</option>
+      </select>
     </div>
-    <section class="flex items-center justify-center min-h-screen">
-      <div id="create-post" class="mt-6 w-full max-w-sm">
-        <h1 class="text-2xl font-bold mb-4">Create a New Post</h1>
-        <form action="/feed" method="POST" class="space-y-4">
-          <div>
-            <label for="post-title" class="block text-sm font-medium text-gray-700">Title</label>
-            <input type="text" id="post-title" name="post-title" required
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-          </div>
-          <div>
-            <label for="post-content" class="block text-sm font-medium text-gray-700">Content</label>
-            <textarea id="post-content" name="post-content" rows="4" required
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
-          </div>
-          <div class="flex items-center justify-between">
-            <button type="submit"
-              class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Submit</button>
-          </div>
-        </form>
-      </div>
-    </section>
-  </main>
-</body>
+    <button id="new-post-button"
+      class="bg-teal-900 text-white py-2 px-4 rounded-md hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-900">New
+      Post</button>
+  </div>
+  <section>
+    <h1 class="text-2xl font-semibold p-2 text-gray-900 text-center">Journey through the pages together</h1>
+    <!-- Posts List -->
+    <div id="postsList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- Example Post -->
+      <article class="bg-white p-4 rounded shadow">
+        <h2 class="text-xl font-bold">Example Post Title</h2>
+        <p>This is an example of a user's thoughts about the book. It's a great read!</p>
+        <p>Book: Example Book Title by Example Author</p>
+        <p>Rating: ★★★★☆</p>
+        <div class="flex justify-left items-center mt-2">
+          <button class=" px-2 py-1 rounded flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="#00d8f5"
+                d="m12.1 18.55l-.1.1l-.11-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04 1 3.57 2.36h1.86C13.46 6 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5c0 2.89-3.14 5.74-7.9 10.05M16.5 3c-1.74 0-3.41.81-4.5 2.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5c0 3.77 3.4 6.86 8.55 11.53L12 21.35l1.45-1.32C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3" />
+            </svg>
+          </button>
+          <p>10 Likes</p>
+        </div>
+        <div class="mt-4">
+          <input type="text" placeholder="Add a comment..." class="w-full p-2 border border-gray-300 rounded">
+        </div>
+      </article>
+      
+    </div>
+  </section>
+  <section>
+    <!-- CREATE NEW POST FORM -->
+    <div id="create-post" class="bg-white p-4 rounded shadow mt-8 w-full max-w-sm ">
+      <h2 class="text-2xl font-bold mb-4">Create a New Post</h2>
+      <form>
+        <div class="mb-4">
+          <label for="postTitle" class="block text-gray-700">Post Title</label>
+          <input type="text" id="postTitle" class="w-full p-2 border border-gray-300 rounded">
+        </div>
+        <div class="mb-4">
+          <label for="bookTitle" class="block text-gray-700">Book Title (Optional)</label>
+          <input type="text" id="bookTitle" class="w-full p-2 border border-gray-300 rounded">
+        </div>
+        <div class="mb-4">
+          <label for="author" class="block text-gray-700">Author (Optional)</label>
+          <input type="text" id="author" class="w-full p-2 border border-gray-300 rounded">
+        </div>
+        <div class="mb-4">
+          <label for="rating" class="block text-gray-700">Rating (Optional)</label>
+          <select id="rating" class="w-full p-2 border border-gray-300 rounded">
+            <option>Select rating</option>
+            <option>1 - Poor</option>
+            <option>2 - Fair</option>
+            <option>3 - Good</option>
+            <option>4 - Very Good</option>
+            <option>5 - Excellent</option>
+          </select>
+        </div>
+        <div class="mb-4">
+          <label for="coverImage" class="block text-gray-700">Book Cover Image (Optional)</label>
+          <input type="file" id="coverImage" class="w-full p-2 border border-gray-300 rounded">
+        </div>
+        <div class="mb-4">
+          <label for="thoughts" class="block text-gray-700">Your Thoughts</label>
+          <textarea id="thoughts" class="w-full p-2 border border-gray-300 rounded"></textarea>
+        </div>
+        <button type="submit"
+          class="w-full bg-teal-900 text-white py-2 px-4 rounded-md hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-600">Post</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+<!-- Footer -->
+<footer class="bg-white shadow mt-8">
+  <div class="container mx-auto px-4 py-4 text-center">
+    &copy; 2024 ReadersRealm
+  </div>
+</footer>
 
 </html>

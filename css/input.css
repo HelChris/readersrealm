@@ -11,3 +11,7 @@ body {
   background-size: cover;
   background-position: center;
 }
+
+.active {
+  border-bottom: 0.3rem solid #14b8a6;
+}
