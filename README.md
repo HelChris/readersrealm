@@ -1,2 +1,3 @@
-# Welcome to some-space
-A social media space where the nostalgia is 4 real. 
+# Welcome to Readers Realm
+
+A social media space where we Journey Through the Pages Together.
