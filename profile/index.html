@@ -16,7 +16,7 @@
   <header class="bg-white shadow">
     <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8 flex justify-between items-end">
       <div class="flex items-end">
-        <img src="/images/readersrealm-logov3.png" class="h-24">
+        <a href="../index.html"><img src="/images/readersrealm-logov3.png" class="h-24"></a>
       </div>
       <div>
         <nav class="flex  space-x-4">
@@ -31,9 +31,9 @@
     <section>
       <div class="bg-white p-6 rounded-lg shadow-lg flex flex-wrap">
         <div class="items-center space-x-4">
-          <img src="/images/avatar-small.jpg" alt="Profile Image" class="w-24 h-24 rounded-full">
+          <img src="/images/avatar-small.jpg" alt="Profile Image" class="pl-4 pt-4 w-24 rounded-full">
           <div>
-            <h2 class="text-2xl font-bold">Nickname</h2>
+            <h2 class="text-2xl font-bold pt-4 pb-4">Nickname</h2>
             <p class="max-w-xs">Lover of all things fantasy and mystery. Perpetually hunting for the next great read.
               Let's share our bookish journeys!
               📖✨</p>
@@ -49,27 +49,27 @@
               </div>
               <div>
                 <h4 class="text-lg font-semibold">Following</h4>
-                <p class="text-gray-600">456</p>
+                <p class="text-gray-600 mb-4">456</p>
               </div>
             </div>
           </div>
         </div>
-        <article class="max-w-4xl mx-auto  rounded-lg p-2">
-          <h2 class="text-2xl font-thin mb-4 text-center">Favorite Books</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="bg-teal-50 p-4 rounded-lg shadow-md">
+        <article class="max-w-4xl mx-auto my-auto rounded-lg p-1 bg-orange-200 border-orange-50 border-8 shadow-md">
+          <h2 class="text-2xl font-medium pt-2 text-center">Favorite Books</h2>
+          <div class="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-orange-100 p-4 rounded-lg border-orange-200 border-2 shadow-md">
               <img src="/images/bookcover-1.jpg" alt="Book Title 1" class="w-full h-40 object-cover rounded-md mb-4">
               <h3 class="text-sm text-center font-semibold">Rising Ashes</h3>
             </div>
-            <div class="bg-teal-50 p-4 rounded-lg shadow-md">
+            <div class="bg-orange-100 p-4 rounded-lg border-orange-200 border-2 shadow-md">
               <img src="/images/bookcover-2.jpg" alt="Book Title 2" class="w-full h-40 object-cover rounded-md mb-4">
               <h3 class="text-sm text-center font-semibold">The young wizard</h3>
             </div>
-            <div class="bg-teal-50 p-4 rounded-lg shadow-md">
+            <div class="bg-orange-100 p-4 rounded-lg border-orange-200 border-2 shadow-md">
               <img src="/images/bookcover-3.jpg" alt="Book Title 2" class="w-full h-40 object-cover rounded-md mb-4">
               <h3 class="text-sm text-center font-semibold">Alchemy</h3>
             </div>
-            <div class="bg-teal-50 p-4 rounded-lg shadow-md">
+            <div class="bg-orange-100 p-4 rounded-lg border-orange-200 border-2 shadow-md">
               <img src="/images/bookcover-4.jpg" alt="Book Title 2" class="w-full h-40 object-cover rounded-md mb-4">
               <h3 class="text-sm text-center font-semibold">Tarot</h3>
             </div>
@@ -104,13 +104,15 @@
             <p class="pl-1">★★★★★</p>
           </div>
           <div class="flex justify-left items-center mt-2">
-            <button class=" px-2 py-1 rounded flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="#00d8f5"
-                  d="m12.1 18.55l-.1.1l-.11-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04 1 3.57 2.36h1.86C13.46 6 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5c0 2.89-3.14 5.74-7.9 10.05M16.5 3c-1.74 0-3.41.81-4.5 2.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5c0 3.77 3.4 6.86 8.55 11.53L12 21.35l1.45-1.32C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3" />
+            <button class="px-2 py-1 rounded flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5 text-gray-500 hover:text-teal-500 hover:fill-teal-500 focus:text-teal-500 focus:fill-teal-500">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
               </svg>
             </button>
-            <p>10 Likes</p>
+            <p>145 Likes</p>
           </div>
           <div class="mt-4">
             <input type="text" placeholder="Add a comment..." class="w-full p-2 border border-gray-300 rounded">
@@ -137,12 +139,14 @@
           </div>
           <div class="flex justify-left items-center mt-2">
             <button class=" px-2 py-1 rounded flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="#00d8f5"
-                  d="m12.1 18.55l-.1.1l-.11-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04 1 3.57 2.36h1.86C13.46 6 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5c0 2.89-3.14 5.74-7.9 10.05M16.5 3c-1.74 0-3.41.81-4.5 2.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5c0 3.77 3.4 6.86 8.55 11.53L12 21.35l1.45-1.32C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3" />
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5 text-gray-500 hover:text-teal-500 hover:fill-teal-500 focus:text-teal-500 focus:fill-teal-500">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
               </svg>
             </button>
-            <p>35 Likes</p>
+            <p>352 Likes</p>
           </div>
           <div class="mt-4">
             <input type="text" placeholder="Add a comment..." class="w-full p-2 border border-gray-300 rounded">
@@ -170,12 +174,14 @@
           </div>
           <div class="flex justify-left items-center mt-2">
             <button class=" px-2 py-1 rounded flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="#00d8f5"
-                  d="m12.1 18.55l-.1.1l-.11-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04 1 3.57 2.36h1.86C13.46 6 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5c0 2.89-3.14 5.74-7.9 10.05M16.5 3c-1.74 0-3.41.81-4.5 2.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5c0 3.77 3.4 6.86 8.55 11.53L12 21.35l1.45-1.32C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3" />
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5 text-gray-500 hover:text-teal-500 hover:fill-teal-500 focus:text-teal-500 focus:fill-teal-500">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
               </svg>
             </button>
-            <p>13 Likes</p>
+            <p>173 Likes</p>
           </div>
           <div class="mt-4">
             <input type="text" placeholder="Add a comment..." class="w-full p-2 border border-gray-300 rounded">

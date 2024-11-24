@@ -10,8 +10,10 @@ body {
   background-image: url('../images/sky-background.jpg');
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 }
 
 .active {
   border-bottom: 0.3rem solid #14b8a6;
 }
+
