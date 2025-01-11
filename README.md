@@ -17,8 +17,8 @@ You can add some bullet points if you'd like to:
 You can list a the tech stack that you've used over here
 
 - Tailwind CSS
-- CSS
-- Vanilla HTML
+- HTML
+- Vanilla JavaScript
 
 
 ## Getting Started
