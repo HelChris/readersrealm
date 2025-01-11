@@ -13,7 +13,7 @@
   <script src="../scripts/index.js" defer></script>
 </head>
 
-<body>
+<body class="min-h-screen bg-sky bg-cover bg-center bg-no-repeat">
   <header class="bg-white shadow">
     <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8 flex justify-between items-end">
       <div class="flex items-end">
@@ -23,7 +23,7 @@
         <nav class="flex  space-x-4">
           <a href="#" class="active text-gray-600 hover:text-gray-900">Feed</a>
           <a href="../profile/index.html" class="text-gray-600 hover:text-gray-900">Profile</a>
-          <a href="../index.html" class="text-gray-600 hover:text-gray-900">Sign out</a>
+          <a href="../index.html" class="text-gray-600  hover:text-gray-900">Sign out</a>
         </nav>
       </div>
     </div>
@@ -31,24 +31,26 @@
 
   <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
 
-    <div class="mb-4">
-      <input type="text" placeholder="Search posts..."
-        class="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-teal-600 focus:border-teal-600">
-    </div>
-    <div class="mb-4 flex justify-between items-center">
-      <div>
-        <label for="sort" class="block text-sm font-medium text-gray-700">Sort by:</label>
-        <select id="sort" name="sort"
-          class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-teal-600 focus:border-teal-600 sm:text-sm rounded-md">
-          <option>Newest</option>
-          <option>Rating</option>
-          <option>Likes</option>
-        </select>
+    <section>
+      <div class="mb-4">
+        <input type="text" placeholder="Search posts..."
+          class="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-teal-600 focus:border-teal-600">
       </div>
-      <button id="new-post-button"
-        class="bg-teal-900 text-white py-2 px-4 rounded-md hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-900">Create
-        Post</button>
-    </div>
+      <div class="mb-4 flex justify-between items-center">
+        <div>
+          <label for="sort" class="block text-sm font-medium text-gray-700">Sort by:</label>
+          <select id="sort" name="sort"
+            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-teal-600 focus:border-teal-600 sm:text-sm rounded-md">
+            <option>Newest</option>
+            <option>Rating</option>
+            <option>Likes</option>
+          </select>
+        </div>
+        <button id="new-post-button"
+          class="bg-teal-900 text-white py-2 px-4 rounded-md hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-900">Create
+          Post</button>
+      </div>
+    </section>
     <section>
       <h1 class="text-2xl font-semibold py-8 text-gray-900 text-left">Journey through the pages together</h1>
       <!-- Posts List -->

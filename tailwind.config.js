@@ -2,7 +2,11 @@
 module.exports = {
   content: ['./**/*.{html,js}', "!./node_modules/'*/*"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        sky: "url('../images/sky-background.jpg')",
+      },
+    },
   },
   plugins: [],
 };

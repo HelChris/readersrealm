@@ -1,19 +1,9 @@
-/* @import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities'; */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-image: url('../images/sky-background.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+@layer components {
+  .active {
+    @apply border-b-[0.3rem] border-teal-500;
+  }
 }
-
-.active {
-  border-bottom: 0.3rem solid #14b8a6;
-}
-
