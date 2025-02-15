@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | ReadersRealm</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/app.js" type="module"></script>
+</head>
+
+<body class="min-h-screen m-4 flex items-center justify-center bg-sky bg-cover bg-center bg-no-repeat">
+  <main class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
+    <a href="/index.html"><img src="/images/readersrealm-logov2.png" alt="Reader's Realm Logo"
+        class="h-32 mx-auto mb-4"></a>
+    <form id="registerForm" action="/profile">
+      <h1 class="text-2xl font-bold text-center">Create an account</h1>
+      <div id="message"></div>
+      <fieldset>
+        <legend class="text-1xl font-light mb-4 text-center">Join Reader's Realm today</legend>
+        <div class="mb-2">
+          <label for="name" class="block text-gray-700 form-label">Name</label>
+          <input type="text" id="name" name="name" aria-describedby="nameHelp" placeholder="Choose a name"
+            class="form-control w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-600"
+            required pattern="[A-Za-zæøåÆØÅ0-9_]+"
+            title="Please use only letters (including æ, ø, å), numbers, and underscores.">
+        </div>
+        <div class="mb-2">
+          <label for="email" class="block text-gray-700 form-label">Email</label>
+          <input type="email" id="email" name="email" aria-describedby="emailHelp"
+            pattern="^[^@]+@(stud\.|)(noroff\.no)$" title="Please provide a noroff.no or stud.noroff.no email address"
+            required placeholder="example@stud.noroff.no"
+            class="form-control w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-600">
+        </div>
+        <div class="mb-2">
+          <label for="password" class="block text-gray-700 form-label">Password</label>
+          <input type="password" id="password" name="password" placeholder="Create a password"
+            class="form-control w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-600"
+            required minlength="8">
+        </div>
+        <div class="mb-4">
+          <label for="confirm-password" class="block text-gray-700 form-label">Confirm Password</label>
+          <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password"
+            class="form-control w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-600"
+            required minlength="8">
+        </div>
+        <div class="mb-4">
+          <label for="bio" class="block text-gray-700 form-label">Bio</label>
+          <textarea
+            class="form-control w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-600"
+            id="bio" name="bio"></textarea>
+        </div>
+        <div class="mb-4">
+          <label for="avatarUrl" class="block text-gray-700 form-label">Avatar URL</label>
+          <input type="url" id="avatarUrl" name="avatarUrl" aria-describedby="avatarUrlHelp"
+            class="form-control w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-600">
+        </div>
+        <div class="flex items-center mb-4">
+          <input type="checkbox" id="terms" name="terms" class="mr-2" required>
+          <label for="terms" class="text-gray-700">I agree to the <a href="/register/termsofservice.html"
+              class="text-blue-500 hover:underline">Terms
+              of Service</a></label>
+        </div>
+        <button type="submit"
+          class="w-full bg-teal-900 text-white py-2 rounded hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-900">
+          Sign Up
+        </button>
+      </fieldset>
+    </form>
+    <p class="mt-4 text-center">Already have an account? <a href="/index.html"
+        class="text-blue-500 hover:underline">Sign In</a></p>
+  </main>
+</body>
+
+</html>

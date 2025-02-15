@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile form | ReadersRealm</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/app.js" type="module"></script>
+</head>
+
+<body class="min-h-screen m-4 flex items-center justify-center bg-sky bg-cover bg-center bg-no-repeat">
+  <main class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
+    <a href="/index.html"><img src="/images/readersrealm-logov2.png" alt="Reader's Realm Logo"
+        class="h-32 mx-auto mb-4"></a>
+    <!-- <h1 class="text-2xl font-bold text-center">Create an Account</h1>
+    <p class="text-1xl font-light mb-4 text-center">Join Reader's Realm today</p> -->
+    <form id="profileUpdateForm" action="/update-profile" enctype="multipart/form-data">
+      <h1 class="text-2xl font-bold text-center">Update Your Profile</h1>
+      <div id="message"></div>
+      <fieldset>
+        <legend class="text-1xl font-light mb-4 text-center">Update your profile information below.</legend>
+        <div class="mb-2">
+          <label for="bio" class="block text-gray-700 form-label">Bio</label>
+          <textarea id="bio" name="bio" aria-describedby="bioHelp" placeholder="Tell us about yourself"
+            class="form-control w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-600"
+            rows="4"></textarea>
+        </div>
+        <div class="mb-2">
+          <label for="avatar" class="block text-gray-700 form-label">Avatar Image</label>
+          <input type="file" id="avatar" name="avatar" accept="image/*"
+            class="form-control w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-600">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 form-label">Favorite Books (Max 5)</label>
+          <div id="bookInputs">
+            <div class="mb-2">
+              <input type="file" name="bookImages[]" accept="image/*"
+                class="form-control w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-600">
+            </div>
+          </div>
+          <button type="button" id="addBookBtn"
+            class="mt-2 bg-teal-600 text-white py-1 px-3 rounded hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-600">
+            Add Another Book
+          </button>
+        </div>
+        <button type="submit"
+          class="w-full bg-teal-900 text-white py-2 rounded hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-900">
+          Update Profile
+        </button>
+      </fieldset>
+    </form>
+
+  </main>
+</body>
+
+</html>

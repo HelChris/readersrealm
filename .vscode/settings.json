@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["somespace"]
+  "cSpell.words": ["somespace"],
+  "cSpell.ignoreWords": ["registerapicall", "zæøå"]
 }
