@@ -1,6 +1,7 @@
 import { validatePassword } from '/js/helpers/formValidation.mjs';
 import { registerHandler } from './events/auth/registerHandler.mjs';
-
+import { loginHandler } from './api/auth/login.js';
+import { fetchPosts } from './api/auth/posts.js';
 // document
 //   .getElementById('new-post-button')
 //   .addEventListener('click', function () {
@@ -16,6 +17,7 @@ function router() {
   switch (pathname) {
     case '/':
       console.log('Home');
+      loginHandler();
       break;
     case '/index.html':
       console.log('Login page');
@@ -29,6 +31,7 @@ function router() {
     case '/feed/index.html':
     case '/feed/':
       console.log('Feed');
+      fetchPosts();
       break;
     case '/profile/index.html':
     case '/profile/':

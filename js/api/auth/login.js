@@ -1,11 +1,37 @@
-import { register } from '../../api/auth/registerapicall.js';
+import { AUTH_ENDPOINTS } from '../../constants/endpoints.js';
+//IMPORT LOCALSTORAGE FUNCTIONS FROM HELPERS!
+import { addToLocalStorage } from '../../helpers/localStorage.js';
+
+export async function login(user) {
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  };
+
+  const response = await fetch(AUTH_ENDPOINTS.login, options);
+  const json = await response.json();
+  const accessToken = json.data.accessToken;
+  addToLocalStorage('accessToken', accessToken);
+
+  console.log(json);
+
+  if (!response.ok) {
+    throw new Error(json.errors?.[0]?.message || 'Oh no, login failed');
+  }
+
+  return json;
+}
+
 import { showError } from '../../ui/shared/errorHandling.js';
-import { showSuccess } from '../../ui/shared/successRegistrationHandling.js';
+import { showSuccess } from '../../ui/shared/successLogin.js';
 
-export function registerHandler() {}
-console.log(registerHandler);
+export function loginHandler() {}
+console.log(loginHandler);
 
-const form = document.querySelector('#registerForm');
+const form = document.querySelector('#login-form');
 if (form) {
   form.addEventListener('submit', submitForm);
 }
@@ -24,26 +50,11 @@ async function submitForm(event) {
   const data = Object.fromEntries(formData);
   console.log(data);
 
-  if (data.bio.trim() === '') {
-    delete data.bio;
-  }
-
-  if (data.avatarUrl.trim() === '') {
-    delete data.avatarUrl;
-  } else {
-    data.avatar = {
-      url: data.avatarUrl,
-      alt: `${data.name}'s avatar`,
-    };
-    delete data.avatarUrl;
-  }
-  console.log(data);
-
   const fieldset = form.querySelector('fieldset');
 
   try {
     fieldset.disabled = true;
-    await register(data);
+    await login(data);
     showSuccess('', '#message');
     form.reset();
   } catch (error) {

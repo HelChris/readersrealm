@@ -1,8 +1,7 @@
-import { BASE_URL } from '../../constants/api.js';
+import { AUTH_ENDPOINTS } from '../../constants/endpoints.js';
 
 export async function register(user) {
-  const url = `${BASE_URL}auth/register`;
-
+  
   const options = {
     method: 'POST',
     headers: {
@@ -11,7 +10,7 @@ export async function register(user) {
     body: JSON.stringify(user),
   };
 
-  const response = await fetch(url, options);
+  const response = await fetch(AUTH_ENDPOINTS.register, options);
   const json = await response.json();
   console.log(response);
 
