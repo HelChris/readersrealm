@@ -11,16 +11,10 @@ if (form) {
 }
 
 async function submitForm(event) {
-  // stop the default behavior where the form is submitted and the page reloaded.
   event.preventDefault();
 
-  // getting the HTML element that triggered the event:
   const form = event.target;
-
-  // creating a new formData object. a way to easily construct a set of key/value pairs representing form fields and their values.
   const formData = new FormData(form);
-
-  // converting the formData into a plain JavaScript object, transforms a list of key-value pairs into an object.
   const data = Object.fromEntries(formData);
   console.log(data);
 

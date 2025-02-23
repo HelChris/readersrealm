@@ -2,21 +2,23 @@ export function createPostElement(post) {
   const postElement = document.createElement('article');
   postElement.className = 'bg-white p-4 rounded-lg shadow';
 
+  // Profile section with author data
   const profileDiv = document.createElement('div');
   profileDiv.className = 'flex flex-row content-center';
 
   const profileImg = document.createElement('img');
-  profileImg.src = '/images/avatar-small.jpg';
-  profileImg.alt = 'Profile Image';
+  profileImg.src = post.author?.avatar?.url || '/images/avatar-small.jpg'; // Fallback if no avatar
+  profileImg.alt = post.author?.avatar?.alt || 'Profile Image';
   profileImg.className = 'w-16 h-16 rounded-full';
 
   const nicknameP = document.createElement('p');
   nicknameP.className = 'p-2 content-center';
-  nicknameP.textContent = post.nickname;
+  nicknameP.textContent = post.author?.name || 'Anonymous';
 
   profileDiv.appendChild(profileImg);
   profileDiv.appendChild(nicknameP);
 
+  // Title and body
   const titleH2 = document.createElement('h2');
   titleH2.className = 'text-xl font-bold';
   titleH2.textContent = post.title;
@@ -25,48 +27,70 @@ export function createPostElement(post) {
   bodyP.className = 'py-1';
   bodyP.textContent = post.body;
 
-  const bookDiv = document.createElement('div');
-  bookDiv.className = 'flex pt-2';
+  // Book section (using tags if applicable)
+  const bookTag = post.tags?.find((tag) => tag.startsWith('book:'));
+  if (bookTag) {
+    const bookDiv = document.createElement('div');
+    bookDiv.className = 'flex pt-2';
 
-  const bookLabel = document.createElement('p');
-  bookLabel.className = 'font-medium';
-  bookLabel.textContent = 'Book:';
+    const bookLabel = document.createElement('p');
+    bookLabel.className = 'font-medium';
+    bookLabel.textContent = 'Book:';
 
-  const bookTitleP = document.createElement('p');
-  bookTitleP.className = 'pl-1';
-  bookTitleP.textContent = post.bookTitle;
+    const bookTitleP = document.createElement('p');
+    bookTitleP.className = 'pl-1';
+    bookTitleP.textContent = bookTag.replace('book:', '').trim();
 
-  bookDiv.appendChild(bookLabel);
-  bookDiv.appendChild(bookTitleP);
+    bookDiv.appendChild(bookLabel);
+    bookDiv.appendChild(bookTitleP);
+    postElement.appendChild(bookDiv);
+  }
 
-  const ratingDiv = document.createElement('div');
-  ratingDiv.className = 'flex pt-2';
+  // Rating section (using tags)
+  const ratingTag = post.tags?.find((tag) => tag.startsWith('rating:'));
+  if (ratingTag) {
+    const rating = parseInt(ratingTag.replace('rating:', ''));
+    const ratingDiv = document.createElement('div');
+    ratingDiv.className = 'flex pt-2';
 
-  const ratingLabel = document.createElement('p');
-  ratingLabel.className = 'font-medium';
-  ratingLabel.textContent = 'Rating:';
+    const ratingLabel = document.createElement('p');
+    ratingLabel.className = 'font-medium';
+    ratingLabel.textContent = 'Rating:';
 
-  const ratingP = document.createElement('p');
-  ratingP.className = 'pl-1';
-  ratingP.textContent = '★'.repeat(post.rating) + '☆'.repeat(5 - post.rating);
+    const ratingP = document.createElement('p');
+    ratingP.className = 'pl-1';
+    ratingP.textContent = '★'.repeat(rating) + '☆'.repeat(5 - rating);
 
-  ratingDiv.appendChild(ratingLabel);
-  ratingDiv.appendChild(ratingP);
+    ratingDiv.appendChild(ratingLabel);
+    ratingDiv.appendChild(ratingP);
+    postElement.appendChild(ratingDiv);
+  }
 
+  // Reactions section
   const likesDiv = document.createElement('div');
   likesDiv.className = 'flex justify-left items-center mt-2';
 
   const likeButton = document.createElement('button');
   likeButton.className = 'px-2 py-1 rounded flex items-center';
+  likeButton.onclick = () => handleReaction(post.id, '❤️');
+
+  // Check if the current user has reacted with any symbol
+  const currentUser = JSON.parse(localStorage.getItem('profile'))?.name;
+  const hasUserReacted = post.reactions?.some((reaction) =>
+    reaction.reactors.includes(currentUser)
+  );
 
   const likeIcon = document.createElement('svg');
   likeIcon.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-  likeIcon.setAttribute('fill', 'none');
   likeIcon.setAttribute('viewBox', '0 0 24 24');
   likeIcon.setAttribute('stroke-width', '1.5');
   likeIcon.setAttribute('stroke', 'currentColor');
-  likeIcon.className =
-    'w-5 h-5 text-gray-500 hover:text-teal-500 hover:fill-teal-500 focus:text-teal-500 focus:fill-teal-500';
+  likeIcon.setAttribute('fill', hasUserReacted ? 'currentColor' : 'none');
+  likeIcon.className = `w-5 h-5 ${
+    hasUserReacted
+      ? 'text-teal-500 fill-teal-500'
+      : 'text-gray-500 hover:text-teal-500 hover:fill-teal-500'
+  }`;
 
   const likePath = document.createElement('path');
   likePath.setAttribute('stroke-linecap', 'round');
@@ -80,11 +104,14 @@ export function createPostElement(post) {
   likeButton.appendChild(likeIcon);
 
   const likesP = document.createElement('p');
-  likesP.textContent = `${post.likes} Likes`;
+  likesP.className = 'ml-1';
+  // Use the total reaction count from _count
+  likesP.textContent = `${post._count.reactions} Likes`;
 
   likesDiv.appendChild(likeButton);
   likesDiv.appendChild(likesP);
 
+  // Comment section
   const commentDiv = document.createElement('div');
   commentDiv.className = 'mt-4';
 
@@ -95,15 +122,33 @@ export function createPostElement(post) {
 
   commentDiv.appendChild(commentInput);
 
+  // Append all elements
   postElement.appendChild(profileDiv);
   postElement.appendChild(titleH2);
   postElement.appendChild(bodyP);
-  postElement.appendChild(bookDiv);
-  postElement.appendChild(ratingDiv);
   postElement.appendChild(likesDiv);
   postElement.appendChild(commentDiv);
 
   return postElement;
+}
+
+// Helper function to handle reactions
+async function handleReaction(postId, symbol) {
+  try {
+    const response = await fetch(`/social/posts/${postId}/react/${symbol}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) throw new Error('Failed to react to post');
+
+    // Refresh the posts to show updated reaction count
+    await refreshPosts();
+  } catch (error) {
+    console.error('Error handling reaction:', error);
+  }
 }
 
 export function generatePosts(posts) {

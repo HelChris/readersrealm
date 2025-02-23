@@ -57,6 +57,7 @@ async function submitForm(event) {
     await login(data);
     showSuccess('', '#message');
     form.reset();
+    location.href = '/feed/index.html';
   } catch (error) {
     console.error(error);
     showError(error, '#message');

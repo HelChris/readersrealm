@@ -1,14 +1,9 @@
-import { validatePassword } from '/js/helpers/formValidation.mjs';
+import { validatePassword } from './helpers/validatePassword.js';
 import { registerHandler } from './events/auth/registerHandler.mjs';
 import { loginHandler } from './api/auth/login.js';
-import { fetchPosts } from './api/auth/posts.js';
-// document
-//   .getElementById('new-post-button')
-//   .addEventListener('click', function () {
-//     document
-//       .getElementById('create-post')
-//       .scrollIntoView({ behavior: 'smooth' });
-//   });
+import { initializePosts } from './api/auth/posts.js';
+
+
 
 function router() {
   const pathname = window.location.pathname;
@@ -31,7 +26,16 @@ function router() {
     case '/feed/index.html':
     case '/feed/':
       console.log('Feed');
-      fetchPosts();
+      document.addEventListener('DOMContentLoaded', () => {
+        initializePosts();
+      });
+      document
+        .getElementById('new-post-button')
+        .addEventListener('click', function () {
+          document
+            .getElementById('create-post')
+            .scrollIntoView({ behavior: 'smooth' });
+        });
       break;
     case '/profile/index.html':
     case '/profile/':
