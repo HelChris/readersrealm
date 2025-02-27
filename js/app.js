@@ -1,9 +1,7 @@
 import { validatePassword } from './helpers/validatePassword.js';
 import { registerHandler } from './events/auth/registerHandler.mjs';
 import { loginHandler } from './api/auth/login.js';
-import { initializePosts } from './api/auth/posts.js';
-
-
+import { initializePosts } from './api/posts/posts.js';
 
 function router() {
   const pathname = window.location.pathname;
