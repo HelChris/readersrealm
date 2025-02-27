@@ -2,9 +2,31 @@ console.log('Hello world');
 import { AUTH_ENDPOINTS } from '../../constants/endpoints.js';
 import { getFromLocalStorage } from '../../helpers/localStorage.js';
 import { generatePosts } from '../../ui/posts/generatePosts.js';
+import { sortPosts } from '../../helpers/postSorter.js';
+import { initializeFilters } from '../../events/posts/filterHandlers.js';
 
 //NB! the API-Keys should be inside a .env (environment file) that's inside a .gitignore file!
 const NOROFF_API_KEY = 'abbd249d-0114-4f05-a472-6c6ea04997b9';
+
+export async function searchPosts(searchTerm) {
+  try {
+    const accessToken = getFromLocalStorage('accessToken');
+    const response = await fetch(
+      `${AUTH_ENDPOINTS.posts}/search?q=${searchTerm}&_author=true&_reactions=true&_comments=true`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'X-Noroff-API-Key': NOROFF_API_KEY,
+        },
+      }
+    );
+    const json = await response.json();
+    return json.data;
+  } catch (error) {
+    console.error('Search error:', error);
+    return [];
+  }
+}
 
 async function fetchPosts() {
   try {
@@ -30,7 +52,9 @@ async function fetchPosts() {
 export async function initializePosts() {
   try {
     const posts = await fetchPosts();
-    generatePosts(posts);
+    const sortedPosts = sortPosts(posts, 'newest');
+    generatePosts(sortedPosts);
+    initializeFilters(posts);
   } catch (error) {
     console.error('Error initializing posts:', error);
   }

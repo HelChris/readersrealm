@@ -1,6 +1,6 @@
 export function createPostElement(post) {
   const postElement = document.createElement('article');
-  postElement.className = 'bg-white p-4 rounded-lg shadow';
+  postElement.className = 'bg-white p-4 rounded-lg shadow flex flex-col h-full';
 
   // Profile section with author data
   const profileDiv = document.createElement('div');
@@ -111,9 +111,12 @@ export function createPostElement(post) {
   likesDiv.appendChild(likeButton);
   likesDiv.appendChild(likesP);
 
+  const spacerDiv = document.createElement('div');
+  spacerDiv.className = 'flex-grow';
+
   // Comment section
   const commentDiv = document.createElement('div');
-  commentDiv.className = 'mt-4';
+  commentDiv.className = 'mt-4 w-full';
 
   const commentInput = document.createElement('input');
   commentInput.type = 'text';
@@ -127,6 +130,7 @@ export function createPostElement(post) {
   postElement.appendChild(titleH2);
   postElement.appendChild(bodyP);
   postElement.appendChild(likesDiv);
+  postElement.appendChild(spacerDiv);
   postElement.appendChild(commentDiv);
 
   return postElement;
