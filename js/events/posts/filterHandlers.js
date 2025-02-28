@@ -1,18 +1,17 @@
 import { sortPosts } from '../../helpers/postSorter.js';
 import { searchPosts } from '../../api/posts/posts.js';
-import { generatePosts } from '../../ui/posts/generatePosts.js'; // Updated import
+import { generatePosts } from '../../ui/posts/generatePosts.js';
 
-let allPosts = []; // store all posts
+let allPosts = []; //store all posts
 
 export function initializeFilters(posts) {
   allPosts = posts;
   setupFilterListeners();
-  setupViewPostListeners();
 }
 
 function setupFilterListeners() {
   const searchInput = document.querySelector(
-    'input[placeholder="Search posts..."]'
+    'input[placeholder="Search posts... (try author:name, book:title)"'
   );
   const sortSelect = document.getElementById('sort');
 
@@ -27,7 +26,7 @@ function setupFilterListeners() {
           const authorName = searchTerm.trim().substring(7).toLowerCase(); // Get the name after "author:"
 
           // Filter posts by author name
-          const filteredPosts = allPosts.filter((post) =>
+          const filteredPosts = allPosts.filter(post =>
             post.author?.name?.toLowerCase().includes(authorName)
           );
 
@@ -55,37 +54,17 @@ function setupFilterListeners() {
   if (sortSelect) {
     sortSelect.addEventListener('change', (event) => {
       const sortType = event.target.value;
-      const searchTerm =
-        document.querySelector('input[placeholder="Search posts..."]')?.value ||
-        '';
+      const searchTerm = document.querySelector('input[placeholder="Search posts..."]').value;
 
       // Keep the author filter applied when changing sort
       if (searchTerm.trim().toLowerCase().startsWith('author:')) {
         const authorName = searchTerm.trim().substring(7).toLowerCase();
-        const filteredPosts = allPosts.filter((post) =>
+        const filteredPosts = allPosts.filter(post =>
           post.author?.name?.toLowerCase().includes(authorName)
         );
         generatePosts(sortPosts(filteredPosts, sortType));
       } else {
         generatePosts(sortPosts(allPosts, sortType));
-      }
-    });
-  }
-}
-
-function setupViewPostListeners() {
-  const postsContainer = document.getElementById('postsList');
-
-  if (postsContainer) {
-    // Delegate clicks on the view post buttons
-    postsContainer.addEventListener('click', (event) => {
-      const viewButton = event.target.closest('.view-post-button');
-      if (viewButton) {
-        const postId = viewButton.dataset.postId;
-        if (postId) {
-          // Navigate to single post page
-          window.location.href = `/post.html?id=${postId}`;
-        }
       }
     });
   }
