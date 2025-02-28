@@ -1,8 +1,5 @@
 import { AUTH_ENDPOINTS } from '../../constants/endpoints.js';
 import { getFromLocalStorage } from '../../helpers/localStorage.js';
-import { generatePosts } from '../../ui/posts/generatePosts.js';
-import { sortPosts } from '../../helpers/postSorter.js';
-import { initializeFilters } from '../../events/posts/filterHandlers.js';
 import { NOROFF_API_KEY } from '../../constants/config.js';
 
 export async function searchPosts(searchTerm) {
@@ -66,16 +63,5 @@ export async function fetchPosts() {
   } catch (error) {
     console.error('Error fetching posts:', error);
     return [];
-  }
-}
-
-export async function initializePosts() {
-  try {
-    const posts = await fetchPosts();
-    const sortedPosts = sortPosts(posts, 'newest');
-    generatePosts(sortedPosts);
-    initializeFilters(posts);
-  } catch (error) {
-    console.error('Error initializing posts:', error);
   }
 }

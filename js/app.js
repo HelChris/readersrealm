@@ -1,7 +1,9 @@
 import { validatePassword } from './helpers/validatePassword.js';
-import { registerHandler } from './events/auth/registerHandler.mjs';
+import { registerHandler } from './events/auth/registerHandler.js';
 import { loginHandler } from './api/auth/login.js';
-import { initializePosts } from './api/posts/posts.js';
+// import { initializePosts } from './api/posts/posts.js';
+import { initializeFeedPage } from './helpers/initializationFeedPage.js';
+import { initializeSinglePostPage } from './helpers/initializationSinglePostPage.js';
 
 function router() {
   const pathname = window.location.pathname;
@@ -25,15 +27,14 @@ function router() {
     case '/feed/':
       console.log('Feed');
       document.addEventListener('DOMContentLoaded', () => {
-        initializePosts();
+        initializeFeedPage();
       });
-      document
-        .getElementById('new-post-button')
-        .addEventListener('click', function () {
-          document
-            .getElementById('create-post')
-            .scrollIntoView({ behavior: 'smooth' });
-        });
+      break;
+    case '/feed/post.html':
+      console.log('Single Post');
+      document.addEventListener('DOMContentLoaded', () => {
+        initializeSinglePostPage();
+      });
       break;
     case '/profile/index.html':
     case '/profile/':

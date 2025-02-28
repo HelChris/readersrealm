@@ -1,5 +1,4 @@
 import { AUTH_ENDPOINTS } from '../../constants/endpoints.js';
-//IMPORT LOCALSTORAGE FUNCTIONS FROM HELPERS!
 import { addToLocalStorage } from '../../helpers/localStorage.js';
 
 export async function login(user) {
