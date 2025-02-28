@@ -3,6 +3,7 @@ import { registerHandler } from './events/auth/registerHandler.js';
 import { loginHandler } from './api/auth/login.js';
 import { initializeFeedPage } from './helpers/initializationFeedPage.js';
 import { initializeSinglePostPage } from './helpers/initializationSinglePostPage.js';
+import { handleCreatePostFormSubmit } from './events/posts/userCreatePost.js';
 
 function router() {
   const pathname = window.location.pathname;
@@ -25,8 +26,15 @@ function router() {
     case '/feed/index.html':
     case '/feed/':
       console.log('Feed');
-      document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener('DOMContentLoaded', async () => {
         initializeFeedPage();
+        const createPostForm = document.querySelector('#create-post form');
+        if (createPostForm) {
+          createPostForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            handleCreatePostFormSubmit(createPostForm);
+          });
+        }
       });
       break;
     case '/feed/post.html':
