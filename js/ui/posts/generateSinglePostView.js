@@ -1,5 +1,10 @@
+import { updateUrlWithTitle } from '../../helpers/urlHandling.js';
+
 export function generateSinglePostView(post, container) {
   if (!post || !container) return;
+
+  //update the URL to include the post title
+  updateUrlWithTitle(post.id, post.title);
 
   // Clear container
   container.innerHTML = '';
@@ -9,7 +14,7 @@ export function generateSinglePostView(post, container) {
   backButtonContainer.className = 'mb-6';
 
   const backLink = document.createElement('a');
-  backLink.href = '/feed/'; // Direct link to feed
+  backLink.href = '/feed/';
   backLink.className =
     'flex items-center text-teal-600 hover:text-teal-800 back-to-feed-button cursor-pointer';
 
@@ -86,32 +91,6 @@ export function generateSinglePostView(post, container) {
     bodyElement.appendChild(mediaContainer);
   }
 
-  // // Tags section
-  // if (post.tags && post.tags.length > 0) {
-  //   const tagsContainer = document.createElement('div');
-  //   tagsContainer.className = 'mb-6';
-
-  //   const tagsTitle = document.createElement('h3');
-  //   tagsTitle.className = 'text-lg font-semibold mb-2';
-  //   tagsTitle.textContent = 'Tags';
-
-  //   const tagsList = document.createElement('div');
-  //   tagsList.className = 'flex flex-wrap gap-2';
-
-  //   post.tags.forEach((tag) => {
-  //     const tagElement = document.createElement('span');
-  //     tagElement.className =
-  //       'bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-sm';
-  //     tagElement.textContent = tag;
-  //     tagsList.appendChild(tagElement);
-  //   });
-
-  //   tagsContainer.appendChild(tagsTitle);
-  //   tagsContainer.appendChild(tagsList);
-  //   bodyElement.appendChild(tagsContainer);
-  // }
-
-  // Book section (using tags if applicable)
   const bookTag = post.tags?.find((tag) => tag.startsWith('book:'));
   if (bookTag) {
     const bookSection = document.createElement('div');
@@ -267,19 +246,19 @@ export function generateSinglePostView(post, container) {
   commentForm.className = 'mt-4';
 
   const commentInputContainer = document.createElement('div');
-  commentInputContainer.className = 'flex space-x-2';
+  commentInputContainer.className = 'space-x-2';
 
   const commentInput = document.createElement('input');
   commentInput.type = 'text';
-  commentInput.placeholder = 'Add a comment...';
+  commentInput.placeholder = 'Your comment here..';
   commentInput.className =
     'flex-grow p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent';
   commentInput.id = 'comment-input';
 
   const commentButton = document.createElement('button');
   commentButton.className =
-    'bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 comment-button';
-  commentButton.textContent = 'Comment';
+    'bg-teal-600 text-white px-4 py-2 mt-2 rounded hover:bg-teal-700 comment-button';
+  commentButton.textContent = 'Add';
   commentButton.dataset.postId = post.id;
 
   commentInputContainer.appendChild(commentInput);
@@ -293,7 +272,8 @@ export function generateSinglePostView(post, container) {
 
   // Assemble the post view
   const postContainer = document.createElement('div');
-  postContainer.className = 'max-w-4xl mx-auto bg-white p-6 rounded-lg shadow';
+  postContainer.className =
+    'max-w-4xl mx-auto m-4 bg-white p-6 rounded-lg shadow';
 
   postContainer.appendChild(backButtonContainer);
   postContainer.appendChild(authorSection);

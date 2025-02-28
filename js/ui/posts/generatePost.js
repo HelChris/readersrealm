@@ -1,3 +1,5 @@
+import { createPostUrl } from '../../helpers/urlHandling.js';
+
 export function generatePostElement(post) {
   const postElement = document.createElement('article');
   postElement.className = 'bg-white p-4 rounded-lg shadow flex flex-col h-full';
@@ -34,10 +36,18 @@ export function generatePostElement(post) {
   headerDiv.appendChild(authorImg);
   headerDiv.appendChild(authorInfo);
 
+  //post title (clickable to view full post with title in URL)
+  const titleLink = document.createElement('a');
+  // use helper to create a URL with both ID and title
+  titleLink.href = createPostUrl(post.id, post.title);
+  titleLink.className = 'post-link';
+
   // Post title
   const titleElement = document.createElement('h2');
   titleElement.className = 'text-xl font-bold mb-3';
   titleElement.textContent = post.title;
+
+  titleLink.appendChild(titleElement);
 
   // Post image/media
   const mediaContainer = document.createElement('div');
@@ -95,6 +105,14 @@ export function generatePostElement(post) {
     'w-full bg-teal-600 text-white py-2 px-4 rounded hover:bg-teal-700 view-post-button';
   viewButton.textContent = 'View Post';
   viewButton.dataset.postId = post.id;
+
+  //
+  //add click event to navigate to the post page with title in URL
+  viewButton.addEventListener('click', function () {
+    window.location.href = createPostUrl(post.id, post.title);
+  });
+  //
+  //
 
   viewButtonContainer.appendChild(viewButton);
 
