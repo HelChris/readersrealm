@@ -1,7 +1,6 @@
 import { validatePassword } from './helpers/validatePassword.js';
 import { registerHandler } from './events/auth/registerHandler.js';
 import { loginHandler } from './api/auth/login.js';
-// import { initializePosts } from './api/posts/posts.js';
 import { initializeFeedPage } from './helpers/initializationFeedPage.js';
 import { initializeSinglePostPage } from './helpers/initializationSinglePostPage.js';
 
