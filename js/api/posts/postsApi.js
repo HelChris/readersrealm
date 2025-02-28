@@ -2,39 +2,39 @@ import { AUTH_ENDPOINTS } from '../../constants/endpoints.js';
 import { getFromLocalStorage } from '../../helpers/localStorage.js';
 import { NOROFF_API_KEY } from '../../constants/config.js';
 
-export async function createPost(postData) {
-  try {
-    const accessToken = getFromLocalStorage('accessToken');
-    const formData = new FormData();
+// export async function createPost(postData) {
+//   try {
+//     const accessToken = getFromLocalStorage('accessToken');
+//     const formData = new FormData();
 
-    // Append post data to formData
-    formData.append('title', postData.title);
-    formData.append('body', postData.body);
-    postData.tags.forEach((tag) => formData.append('tags', tag));
-    if (postData.media && postData.media.file) {
-      formData.append('media', postData.media.file);
-    }
+//     // Append post data to formData
+//     formData.append('title', postData.title);
+//     formData.append('body', postData.body);
+//     postData.tags.forEach((tag) => formData.append('tags', tag));
+//     if (postData.media && postData.media.file) {
+//       formData.append('media', postData.media.file);
+//     }
 
-    const response = await fetch(AUTH_ENDPOINTS.posts, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        'X-Noroff-API-Key': NOROFF_API_KEY,
-      },
-      body: formData,
-    });
+//     const response = await fetch(AUTH_ENDPOINTS.posts, {
+//       method: 'POST',
+//       headers: {
+//         Authorization: `Bearer ${accessToken}`,
+//         'X-Noroff-API-Key': NOROFF_API_KEY,
+//       },
+//       body: formData,
+//     });
 
-    if (!response.ok) {
-      throw new Error('Failed to create post');
-    }
+//     if (!response.ok) {
+//       throw new Error('Failed to create post');
+//     }
 
-    const json = await response.json();
-    return json.data;
-  } catch (error) {
-    console.error('Error creating post:', error);
-    throw error;
-  }
-}
+//     const json = await response.json();
+//     return json.data;
+//   } catch (error) {
+//     console.error('Error creating post:', error);
+//     throw error;
+//   }
+// }
 
 export async function searchPosts(searchTerm) {
   try {
