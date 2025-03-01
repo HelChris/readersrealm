@@ -1,4 +1,3 @@
-import { validatePassword } from './helpers/validatePassword.js';
 import { registerHandler } from './events/auth/registerHandler.js';
 import { loginHandler } from './api/auth/login.js';
 import { initializeFeedPage } from './helpers/initializationFeedPage.js';
@@ -10,38 +9,29 @@ function router() {
 
   switch (pathname) {
     case '/':
-      console.log('Home');
-      loginHandler();
-      break;
     case '/index.html':
-      console.log('Login page');
+      loginHandler();
+
       break;
     case '/register/register.html':
-    case '/register/':
-      console.log('Register page');
-      document.querySelector('form').onsubmit = validatePassword;
       registerHandler();
       break;
     case '/feed/index.html':
     case '/feed/':
-      console.log('Feed');
       document.addEventListener('DOMContentLoaded', () => {
         initializeFeedPage();
       });
 
       break;
     case '/feed/post.html':
-      console.log('Single Post');
       document.addEventListener('DOMContentLoaded', () => {
         initializeSinglePostPage();
       });
       break;
     case '/profile/index.html':
     case '/profile/':
-      console.log('Profile page');
       break;
     case '/register/termsofservice.html':
-      console.log('Terms of service page');
       break;
   }
 }
