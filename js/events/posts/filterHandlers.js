@@ -1,3 +1,4 @@
+
 import { sortPosts } from '../../helpers/postSorter.js';
 import { searchPosts } from '../../api/posts/posts.js';
 import { generatePosts } from '../../ui/posts/generatePosts.js';
@@ -11,7 +12,7 @@ export function initializeFilters(posts) {
 
 function setupFilterListeners() {
   const searchInput = document.querySelector(
-    'input[placeholder="Search posts... (try author:name, book:title)"'
+    'input[placeholder="Search posts... (try author:name, book:title)"]'
   );
   const sortSelect = document.getElementById('sort');
 
@@ -54,9 +55,10 @@ function setupFilterListeners() {
   if (sortSelect) {
     sortSelect.addEventListener('change', (event) => {
       const sortType = event.target.value;
-      const searchTerm = document.querySelector(
+      const searchInput = document.querySelector(
         'input[placeholder="Search posts... (try author:name, book:title)"]'
       );
+      const searchTerm = searchInput.value; // Get the value of the input element
 
       // Keep the author filter applied when changing sort
       if (searchTerm.trim().toLowerCase().startsWith('author:')) {
