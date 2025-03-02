@@ -1,4 +1,4 @@
-import { setupCreatePostFormSubmit } from "./createPostHandler.js";
+import { setupCreatePostFormSubmit } from './createPostHandler.js';
 
 /**
  * Sets up all event listeners for the feed page
