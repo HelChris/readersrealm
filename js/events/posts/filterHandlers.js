@@ -11,7 +11,7 @@ export function initializeFilters(posts) {
 
 function setupFilterListeners() {
   const searchInput = document.querySelector(
-    'input[placeholder="Search posts... (try author:name, book:title)"]'
+    'input[placeholder="Search posts... (try author:name)"]'
   );
   const sortSelect = document.getElementById('sort');
 
@@ -55,7 +55,7 @@ function setupFilterListeners() {
     sortSelect.addEventListener('change', (event) => {
       const sortType = event.target.value;
       const searchInput = document.querySelector(
-        'input[placeholder="Search posts... (try author:name, book:title)"]'
+        'input[placeholder="Search posts... (try author:name)"]'
       );
       const searchTerm = searchInput.value; // Get the value of the input element
 

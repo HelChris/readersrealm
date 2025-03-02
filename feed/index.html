@@ -33,7 +33,7 @@
 
     <section class="m-2">
       <div class="mb-4">
-        <input type="text" placeholder="Search posts... (try author:name, book:title)"
+        <input type="text" placeholder="Search posts... (try author:name)"
           class="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-teal-600 focus:border-teal-600">
       </div>
       <div class="mb-4 flex justify-between items-center">
@@ -41,9 +41,8 @@
           <label for="sort" class="block text-sm font-medium text-gray-700">Sort by:</label>
           <select id="sort" name="sort"
             class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-teal-600 focus:border-teal-600 sm:text-sm rounded-md">
-            <option>Newest</option>
-            <option>Oldest</option>
-            <option>Most likes</option>
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
           </select>
         </div>
         <button id="new-post-button"

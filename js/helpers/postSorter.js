@@ -1,4 +1,4 @@
-//sorts the post by newest/oldest/most likes drop down menu
+//sorts the post by newest/oldest drop down menu
 export function sortPosts(posts, sortType) {
   if (!posts || posts.length === 0) return [];
 
@@ -8,10 +8,6 @@ export function sortPosts(posts, sortType) {
     case 'oldest':
       return sortedPosts.sort(
         (a, b) => new Date(a.created) - new Date(b.created)
-      );
-    case 'most likes':
-      return sortedPosts.sort(
-        (a, b) => b._count.reactions - a._count.reactions
       );
     case 'newest':
     default:
