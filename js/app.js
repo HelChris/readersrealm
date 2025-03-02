@@ -3,10 +3,19 @@ import { loginHandler } from './api/auth/login.js';
 import { initializeFeedPage } from './helpers/initializationFeedPage.js';
 import { initializeSinglePostPage } from './helpers/initializationSinglePostPage.js';
 import { initializeEditPostPage } from './ui/posts/generateEditPostForm.js';
+import { logout } from './helpers/auth.js';
 
 function router() {
   const pathname = window.location.pathname;
-  console.log(pathname);
+
+  //event listener to logout button on all pages that have it
+  const logoutButton = document.getElementById('logout-button');
+  if (logoutButton) {
+    logoutButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      logout();
+    });
+  }
 
   switch (pathname) {
     case '/':

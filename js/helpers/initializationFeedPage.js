@@ -2,7 +2,7 @@ import { fetchPosts } from '../api/posts/posts.js';
 import { generatePosts } from '../ui/posts/generatePosts.js';
 import { initializeFilters } from '../events/posts/filterHandlers.js';
 import { setupCreatePostFormSubmit } from '../events/posts/createPostHandler.js';
-import { generateCreatePostForm } from '../ui/posts/generateCreatePostForm.js'; // Add this import
+import { generateCreatePostForm } from '../ui/posts/generateCreatePostForm.js';
 
 export async function initializeFeedPage() {
   try {
