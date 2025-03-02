@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post | ReadersRealm</title>
+  <title>Edit Post | ReadersRealm</title>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -20,8 +20,8 @@
         <a href="../feed/index.html"><img src="/images/readersrealm-logov3.png" class="h-24"></a>
       </div>
       <div>
-        <nav class="flex  space-x-4">
-          <a href="../feed/index.html" class=" text-gray-600 hover:text-gray-900">Feed</a>
+        <nav class="flex space-x-4">
+          <a href="../feed/index.html" class="text-gray-600 hover:text-gray-900">Feed</a>
           <a href="../profile/index.html" class="text-gray-600 hover:text-gray-900">Profile</a>
           <a href="#" id="logout-button" class="text-gray-600 hover:text-gray-900">Sign out</a>
         </nav>
@@ -30,10 +30,18 @@
   </header>
 
   <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex-grow">
-    <div id="post-container">
-      <!-- Single post will be inserted here  -->
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow">
+      <a href="javascript:history.back()" class="flex items-center text-teal-600 hover:text-teal-800 mb-6">
+        <span class="mr-2">&larr;</span> Back
+      </a>
+      <h1 class="text-2xl font-bold mb-6">Edit Post</h1>
+      <div id="edit-message"></div>
+      <div id="edit-form-container">
+        <!-- The edit form will be generated here by JavaScript -->
+      </div>
     </div>
   </main>
+
   <!-- Footer -->
   <footer class="bg-white shadow mt-8">
     <div class="container mx-auto px-4 py-4 text-center">

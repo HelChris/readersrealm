@@ -1,18 +1,108 @@
+// import { sortPosts } from '../../helpers/postSorter.js';
+// import { searchPosts } from '../../api/posts/posts.js';
+// import { generatePosts } from '../../ui/posts/generatePosts.js';
+
+// let allPosts = []; //store all posts
+
+// export function initializeFilters(posts) {
+//   allPosts = posts;
+//   setupFilterListeners();
+// }
+
+// function setupFilterListeners() {
+//   const searchInput = document.querySelector(
+//     'input[placeholder="Search posts... (try author:name)"]'
+//   );
+//   const sortSelect = document.getElementById('sort');
+
+//   if (searchInput) {
+//     let timeoutId;
+//     searchInput.addEventListener('input', async (event) => {
+//       clearTimeout(timeoutId);
+//       timeoutId = setTimeout(async () => {
+//         const searchTerm = event.target.value;
+//         // Check if we're searching for author using the format "author:name"
+//         if (searchTerm.trim().toLowerCase().startsWith('author:')) {
+//           const authorName = searchTerm.trim().substring(7).toLowerCase(); // Get the name after "author:"
+
+//           // Filter posts by author name
+//           const filteredPosts = allPosts.filter((post) =>
+//             post.author?.name?.toLowerCase().includes(authorName)
+//           );
+
+//           generatePosts(
+//             sortPosts(filteredPosts, document.getElementById('sort').value)
+//           );
+//         }
+//         // Regular search
+//         else if (searchTerm.trim()) {
+//           const searchResults = await searchPosts(searchTerm);
+//           generatePosts(
+//             sortPosts(searchResults, document.getElementById('sort').value)
+//           );
+//         }
+//         // Empty search - show all posts
+//         else {
+//           generatePosts(
+//             sortPosts(allPosts, document.getElementById('sort').value)
+//           );
+//         }
+//       }, 300);
+//     });
+//   }
+
+//   if (sortSelect) {
+//     sortSelect.addEventListener('change', (event) => {
+//       const sortType = event.target.value;
+//       const searchInput = document.querySelector(
+//         'input[placeholder="Search posts... (try author:name)"]'
+//       );
+//       const searchTerm = searchInput.value; // Get the value of the input element
+
+//       // Keep the author filter applied when changing sort
+//       if (searchTerm.trim().toLowerCase().startsWith('author:')) {
+//         const authorName = searchTerm.trim().substring(7).toLowerCase();
+//         const filteredPosts = allPosts.filter((post) =>
+//           post.author?.name?.toLowerCase().includes(authorName)
+//         );
+//         generatePosts(sortPosts(filteredPosts, sortType));
+//       } else {
+//         generatePosts(sortPosts(allPosts, sortType));
+//       }
+//     });
+//   }
+// }
+
 import { sortPosts } from '../../helpers/postSorter.js';
 import { searchPosts } from '../../api/posts/posts.js';
-import { generatePosts } from '../../ui/posts/generatePosts.js'; // Updated import
+import { generatePosts } from '../../ui/posts/generatePosts.js';
 
-let allPosts = []; // store all posts
+let allPosts = []; //store all posts
 
+/**
+ * Initializes the post filtering system with the provided posts
+ *
+ * @param {Array} posts - Array of post objects to be filtered
+ * @returns {void}
+ *
+ * @example
+ * // Initialize filters with posts from API
+ * try {
+ *   const postsData = await fetchPosts();
+ *   initializeFilters(postsData);
+ *   console.log('Post filters initialized with', postsData.length, 'posts');
+ * } catch (error) {
+ *   console.error('Failed to initialize filters:', error.message);
+ * }
+ */
 export function initializeFilters(posts) {
   allPosts = posts;
   setupFilterListeners();
-  setupViewPostListeners();
 }
 
 function setupFilterListeners() {
   const searchInput = document.querySelector(
-    'input[placeholder="Search posts..."]'
+    'input[placeholder="Search posts... (try author:name)"]'
   );
   const sortSelect = document.getElementById('sort');
 
@@ -55,9 +145,10 @@ function setupFilterListeners() {
   if (sortSelect) {
     sortSelect.addEventListener('change', (event) => {
       const sortType = event.target.value;
-      const searchTerm =
-        document.querySelector('input[placeholder="Search posts..."]')?.value ||
-        '';
+      const searchInput = document.querySelector(
+        'input[placeholder="Search posts... (try author:name)"]'
+      );
+      const searchTerm = searchInput.value; // Get the value of the input element
 
       // Keep the author filter applied when changing sort
       if (searchTerm.trim().toLowerCase().startsWith('author:')) {
@@ -68,24 +159,6 @@ function setupFilterListeners() {
         generatePosts(sortPosts(filteredPosts, sortType));
       } else {
         generatePosts(sortPosts(allPosts, sortType));
-      }
-    });
-  }
-}
-
-function setupViewPostListeners() {
-  const postsContainer = document.getElementById('postsList');
-
-  if (postsContainer) {
-    // Delegate clicks on the view post buttons
-    postsContainer.addEventListener('click', (event) => {
-      const viewButton = event.target.closest('.view-post-button');
-      if (viewButton) {
-        const postId = viewButton.dataset.postId;
-        if (postId) {
-          // Navigate to single post page
-          window.location.href = `/post.html?id=${postId}`;
-        }
       }
     });
   }
