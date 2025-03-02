@@ -1,17 +1,4 @@
-// import { getFromLocalStorage } from './localStorage.js';
-
-// export function doesPostBelongToUser(authorName) {
-//   const username = getFromLocalStorage('username');
-
-//   if (authorName === username) {
-//     return true;
-//   }
-//   return false;
-// }
-
-
 import { getFromLocalStorage } from './localStorage.js';
-
 /**
  * Checks if the current logged-in user is the author of a post
  *
