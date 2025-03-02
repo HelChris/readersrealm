@@ -1,4 +1,4 @@
-//create simplified post cards::
+//create simplified post cards for the post feed::
 import { generatePostElement } from '../posts/generatePost.js';
 
 export function generatePosts(posts) {

@@ -14,14 +14,14 @@ export async function login(user) {
   const response = await fetch(AUTH_ENDPOINTS.login, options);
   const json = await response.json();
 
-  console.log(json);
-
   if (!response.ok) {
     throw new Error(json.errors?.[0]?.message || 'Oh no, login failed');
   }
 
-  const accessToken = json.data.accessToken;
+  const { accessToken, name, email } = json.data;
   addToLocalStorage('accessToken', accessToken);
+  addToLocalStorage('username', name);
+  addToLocalStorage('email', email);
 
   return json;
 }

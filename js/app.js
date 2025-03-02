@@ -2,6 +2,7 @@ import { registerHandler } from './events/auth/registerHandler.js';
 import { loginHandler } from './api/auth/login.js';
 import { initializeFeedPage } from './helpers/initializationFeedPage.js';
 import { initializeSinglePostPage } from './helpers/initializationSinglePostPage.js';
+import { initializeEditPostPage } from './ui/posts/generateEditPostForm.js';
 
 function router() {
   const pathname = window.location.pathname;
@@ -21,11 +22,15 @@ function router() {
       document.addEventListener('DOMContentLoaded', () => {
         initializeFeedPage();
       });
-
       break;
     case '/feed/post.html':
       document.addEventListener('DOMContentLoaded', () => {
         initializeSinglePostPage();
+      });
+      break;
+    case '/feed/editpost.html':
+      document.addEventListener('DOMContentLoaded', () => {
+        initializeEditPostPage();
       });
       break;
     case '/profile/index.html':

@@ -1,4 +1,3 @@
-
 import { sortPosts } from '../../helpers/postSorter.js';
 import { searchPosts } from '../../api/posts/posts.js';
 import { generatePosts } from '../../ui/posts/generatePosts.js';

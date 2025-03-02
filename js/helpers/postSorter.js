@@ -1,3 +1,4 @@
+//sorts the post by newest/oldest/most likes drop down menu
 export function sortPosts(posts, sortType) {
   if (!posts || posts.length === 0) return [];
 

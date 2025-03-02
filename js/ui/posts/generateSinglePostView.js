@@ -1,4 +1,6 @@
 import { updateUrlWithTitle } from '../../helpers/urlHandling.js';
+import { doesPostBelongToUser } from '../../helpers/user.js';
+import { deletePost } from '../../api/posts/deletePost.js';
 
 export function generateSinglePostView(post, container) {
   if (!post || !container) return;
@@ -137,6 +139,57 @@ export function generateSinglePostView(post, container) {
     }
 
     bodyElement.appendChild(bookSection);
+  }
+
+  // Add edit and delete buttons
+  const isOwner = doesPostBelongToUser(post.author?.name);
+  if (isOwner) {
+    const actionButtons = document.createElement('div');
+    actionButtons.className = 'flex justify-end space-x-2 mb-4';
+
+    // Edit button
+    const editButton = document.createElement('a');
+    editButton.href = `/feed/editpost.html?id=${post.id}`;
+    editButton.className =
+      'bg-teal-600 text-white py-1 px-3 rounded hover:bg-teal-700 flex items-center';
+    editButton.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+      </svg>
+      Edit
+    `;
+
+    // Delete button
+    const deleteButton = document.createElement('button');
+    deleteButton.className =
+      'bg-red-600 text-white py-1 px-3 rounded hover:bg-red-700 flex items-center';
+    deleteButton.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+      </svg>
+      Delete
+    `;
+
+    // Add delete functionality
+    deleteButton.addEventListener('click', async () => {
+      const confirmDelete = confirm(
+        'Are you sure you want to delete this post?'
+      );
+      if (confirmDelete) {
+        try {
+          await deletePost(post.id);
+          // Redirect to feed after successful deletion
+          window.location.href = '/feed/';
+        } catch (error) {
+          console.error('Error deleting post:', error);
+          alert('Failed to delete post. Please try again.');
+        }
+      }
+    });
+
+    actionButtons.appendChild(editButton);
+    actionButtons.appendChild(deleteButton);
+    bodyElement.appendChild(actionButtons);
   }
 
   // Likes count display (static, above reactions section)

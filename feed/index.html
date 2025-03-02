@@ -13,7 +13,7 @@
   <script src="/js/app.js" type="module"></script>
 </head>
 
-<body class="min-h-screen bg-sky bg-cover bg-center bg-no-repeat">
+<body class="min-h-screen bg-sky bg-cover bg-center bg-no-repeat flex flex-col">
   <header class="bg-white shadow">
     <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8 flex justify-between items-end">
       <div class="flex items-end">
@@ -29,7 +29,7 @@
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+  <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex-grow">
 
     <section class="m-2">
       <div class="mb-4">
@@ -62,46 +62,68 @@
 
     <section>
       <!-- CREATE NEW POST FORM -->
-      <div id="create-post" class="bg-white p-4 rounded shadow mt-8 w-full max-w-lg mx-auto ">
-        <h2 class="text-2xl font-bold mb-4">Create a New Post</h2>
-        <form>
-          <div class="mb-4">
-            <label for="postTitle" class="block text-gray-700">Post Title</label>
-            <input type="text" id="postTitle" placeholder="Enter title of your post"
-              class="w-full p-2 border border-gray-300 rounded">
-          </div>
-          <div class="mb-4">
-            <label for="bookTitle" class="block text-gray-700">Book Title (Optional)</label>
-            <input type="text" id="bookTitle" placeholder="Add a book title?"
-              class="w-full p-2 border border-gray-300 rounded">
-          </div>
-          <div class="mb-4">
-            <label for="author" class="block text-gray-700">Author (Optional)</label>
-            <input type="text" id="author" placeholder="Add author?" class="w-full  p-2 border border-gray-300 rounded">
-          </div>
-          <div class="mb-4">
-            <label for="rating" class="block text-gray-700">Rating (Optional)</label>
-            <select id="rating" class="w-full p-2 border border-gray-300 rounded">
-              <option>Select rating</option>
-              <option>1 - Poor</option>
-              <option>2 - Fair</option>
-              <option>3 - Good</option>
-              <option>4 - Very Good</option>
-              <option>5 - Excellent</option>
-            </select>
-          </div>
-          <div class="mb-4">
-            <label for="coverImage" class="block text-gray-700">Book Cover Image (Optional)</label>
-            <input type="file" id="coverImage" class="w-full p-2 border border-gray-300 rounded">
-          </div>
-          <div class="mb-4">
-            <label for="thoughts" class="block text-gray-700">Your Thoughts</label>
-            <textarea id="thoughts" placeholder="Share your thoughts"
-              class="w-full p-2 border border-gray-300 rounded"></textarea>
-          </div>
-          <button type="submit"
-            class="w-full bg-teal-900 text-white py-2 px-4 rounded-md hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-600">Post</button>
-        </form>
+      <div class="bg-white p-4 rounded shadow mt-8 w-full max-w-lg mx-auto" id="create-post-container">
+        <div id="create-post-message"></div>
+        <div id="create-post"></div>
+        <!-- <form id="createPostForm">
+          <h2 class="text-2xl font-bold mb-4 text-balance text-center">Create a new post or book review:</h2>
+          <fieldset>
+            <div class="mb-4">
+              <label for="title" class="block text-gray-700">Post Title</label>
+              <input type="text" id="title" name="title" placeholder="Enter title of your post"
+                class="w-full p-2 border border-gray-300 rounded">
+            </div>
+            <div class="mb-4">
+              <label for="body" class="block text-gray-700">Your Thoughts</label>
+              <textarea id="body" name="body" placeholder="Share your thoughts"
+                class="w-full p-2 border border-gray-300 rounded"></textarea>
+            </div>
+            <div class="mb-4">
+              <label for="bookTitle" class="block text-gray-700">Book Title (Optional)</label>
+              <input type="text" id="bookTitle" name="bookTitle" placeholder="Add a book title?"
+                class="w-full p-2 border border-gray-300 rounded">
+            </div>
+            <div class="mb-4">
+              <label for="bookAuthor" class="block text-gray-700">Author (Optional)</label>
+              <input type="text" id="bookAuthor" name="bookAuthor" placeholder="Add author?"
+                class="w-full  p-2 border border-gray-300 rounded">
+            </div>
+            <div class="mb-4">
+              <label for="rating" class="block text-gray-700">Rating (Optional)</label>
+              <select id="rating" name="rating" class="w-full p-2 border border-gray-300 rounded">
+                <option>Select rating</option>
+                <option name="option1">1 - Poor</option>
+                <option name="option2">2 - Fair</option>
+                <option name="option3">3 - Good</option>
+                <option name="option4">4 - Very Good</option>
+                <option name="option5">5 - Excellent</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label for="coverImage" class="block text-gray-700">Book Cover Image (Optional)</label>
+              <input type="file" id="coverImage" name="coverImage" class="w-full p-2 border border-gray-300 rounded">
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-700">Or provide an image URL</label>
+              <div class="space-y-2">
+                <div>
+                  <label for="mediaUrl" class="block text-sm text-gray-600">Image URL</label>
+                  <input type="url" id="mediaUrl" name="mediaUrl" placeholder="https://example.com/image.jpg"
+                    class="w-full p-2 border border-gray-300 rounded">
+                </div>
+                <div>
+                  <label for="mediaAlt" class="block text-sm text-gray-600">Image Description (Alt Text)</label>
+                  <input type="text" id="mediaAlt" name="mediaAlt" placeholder="Brief description of the image"
+                    class="w-full p-2 border border-gray-300 rounded">
+                </div>
+              </div>
+              <p class="text-xs text-gray-500 mt-1">Must be a publicly accessible image URL</p>
+            </div>
+
+            <button type="submit"
+              class="w-full bg-teal-900 text-white py-2 px-4 rounded-md hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-600">Post</button>
+          </fieldset>
+        </form> -->
       </div>
     </section>
 
