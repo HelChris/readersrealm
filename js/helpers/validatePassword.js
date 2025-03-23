@@ -19,9 +19,9 @@
  * });
  */
 export function validatePassword() {
-  var password = document.getElementById('password').value;
-  var confirmPassword = document.getElementById('confirm-password').value;
-  var errorMessage = document.getElementById('password-error');
+  const password = document.getElementById('password').value;
+  const confirmPassword = document.getElementById('confirm-password').value;
+  let errorMessage = document.getElementById('password-error');
 
   if (!errorMessage) {
     errorMessage = document.createElement('div');

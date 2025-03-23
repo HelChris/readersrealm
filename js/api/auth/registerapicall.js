@@ -34,7 +34,6 @@ export async function register(user) {
 
   const response = await fetch(AUTH_ENDPOINTS.register, options);
   const json = await response.json();
-  console.log(response);
 
   if (!response.ok) {
     throw new Error(json.errors?.[0]?.message || 'Oh no, registration failed');

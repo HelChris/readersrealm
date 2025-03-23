@@ -64,7 +64,6 @@ export function loginHandler() {
 
     // converting the formData into a plain JavaScript object, transforms a list of key-value pairs into an object.
     const data = Object.fromEntries(formData);
-    console.log(data);
 
     const fieldset = form.querySelector('fieldset');
 
