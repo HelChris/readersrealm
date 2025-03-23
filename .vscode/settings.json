@@ -1,3 +1,12 @@
 {
-  "cSpell.words": ["somespace"]
+  "cSpell.words": [
+    "Baldree",
+    "editpost",
+    "heartreactions",
+    "larr",
+    "somespace",
+    "termsofservice",
+    "webdev"
+  ],
+  "cSpell.ignoreWords": ["loginapicall", "registerapicall", "zæøå"]
 }
