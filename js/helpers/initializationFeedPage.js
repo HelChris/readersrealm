@@ -1,5 +1,5 @@
 import { fetchPosts } from '../api/posts/posts.js';
-import { generatePosts } from '../ui/posts/generatePosts.js';
+import { generatePosts, showPostSkeletons } from '../ui/posts/generatePosts.js';
 import { initializeFilters } from '../events/posts/filterHandlers.js';
 import { setupCreatePostFormSubmit } from '../events/posts/createPostHandler.js';
 import { generateCreatePostForm } from '../ui/posts/generateCreatePostForm.js';
@@ -29,8 +29,7 @@ export async function initializeFeedPage() {
     // Show loading state
     const postsContainer = document.getElementById('postsList');
     if (postsContainer) {
-      postsContainer.innerHTML =
-        '<p class="text-center py-8">Loading posts...</p>';
+      showPostSkeletons();
     }
 
     // render the create new post form

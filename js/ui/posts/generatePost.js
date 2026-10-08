@@ -29,7 +29,8 @@ import { createPostUrl } from '../../helpers/urlHandling.js';
  */
 export function generatePostElement(post) {
   const postElement = document.createElement('article');
-  postElement.className = 'bg-white p-4 rounded-lg shadow flex flex-col h-full';
+  postElement.className =
+    'post-card bg-white p-4 rounded-lg shadow flex flex-col h-full';
 
   // Header with author info
   const headerDiv = document.createElement('div');
