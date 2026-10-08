@@ -33,16 +33,19 @@ export async function initializeFeedPage() {
     }
 
     // render the create new post form
-    const createPostContainer = document.getElementById('create-post');
+    const createPostContainer = document.getElementById('create-post-form');
     if (createPostContainer) {
+      createPostContainer.innerHTML = '';
       createPostContainer.appendChild(generateCreatePostForm());
     }
+
+    setupCreatePostFormSubmit();
+    setupCreatePostButton();
+    setupBackToTopButton();
 
     const posts = await fetchPosts();
     generatePosts(posts);
     initializeFilters(posts);
-    setupCreatePostFormSubmit();
-    setupCreatePostButton();
   } catch (error) {
     console.error('Error initializing feed:', error);
     // Show error state
@@ -56,16 +59,50 @@ export async function initializeFeedPage() {
 
 function setupCreatePostButton() {
   const newPostButton = document.getElementById('new-post-button');
-  const createPostForm = document.getElementById('create-post');
+  const modal = document.getElementById('create-post-container');
+  const closeButton = document.getElementById('close-create-post');
 
-  if (newPostButton && createPostForm) {
-    newPostButton.addEventListener('click', function () {
-      createPostForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-      setTimeout(() => {
-        const titleInput = document.getElementById('title');
-        if (titleInput) titleInput.focus();
-      }, 800);
-    });
+  if (!newPostButton || !modal) {
+    return;
   }
+
+  const closeModal = () => {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  };
+
+  newPostButton.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.getElementById('title')?.focus();
+  });
+  closeButton?.addEventListener('click', closeModal);
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+  });
+}
+
+function setupBackToTopButton() {
+  const backToTopButton = document.getElementById('back-to-top');
+
+  if (!backToTopButton) {
+    return;
+  }
+
+  const updateVisibility = () => {
+    backToTopButton.classList.toggle('hidden', window.scrollY < 400);
+  };
+
+  window.addEventListener('scroll', updateVisibility, { passive: true });
+  backToTopButton.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  updateVisibility();
 }

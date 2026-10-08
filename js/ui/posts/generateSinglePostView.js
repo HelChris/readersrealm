@@ -51,7 +51,7 @@ export function generateSinglePostView(post, container) {
   backButtonContainer.className = 'mb-6';
 
   const backLink = document.createElement('a');
-  backLink.href = '/feed/';
+  backLink.href = '../feed/index.html';
   backLink.className =
     'flex items-center text-teal-600 hover:text-teal-800 back-to-feed-button cursor-pointer';
 

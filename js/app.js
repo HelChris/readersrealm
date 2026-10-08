@@ -27,6 +27,14 @@ import {
 function router() {
   const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
 
+  const runWhenReady = (callback) => {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', callback, { once: true });
+    } else {
+      callback();
+    }
+  };
+
   //event listener to logout button on all pages that have it
   const logoutButton = document.getElementById('logout-button');
   if (logoutButton) {
@@ -44,9 +52,12 @@ function router() {
   }
 
   if (pathname.endsWith('/profile/index.html') || pathname.endsWith('/profile')) {
-    document.addEventListener('DOMContentLoaded', () => {
-      initializeProfilePage();
-    });
+    runWhenReady(() => initializeProfilePage());
+    return;
+  }
+
+  if (pathname.endsWith('/feed/index.html') || pathname.endsWith('/feed')) {
+    runWhenReady(() => initializeFeedPage());
     return;
   }
 
@@ -58,11 +69,8 @@ function router() {
     case '/register/register.html':
       registerHandler();
       break;
-    case '/feed/index.html':
-    case '/feed/':
-      document.addEventListener('DOMContentLoaded', () => {
-        initializeFeedPage();
-      });
+    case '/feed':
+      runWhenReady(() => initializeFeedPage());
       break;
     case '/feed/post.html':
       document.addEventListener('DOMContentLoaded', () => {
