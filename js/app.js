@@ -4,6 +4,10 @@ import { initializeFeedPage } from './helpers/initializationFeedPage.js';
 import { initializeSinglePostPage } from './helpers/initializationSinglePostPage.js';
 import { initializeEditPostPage } from './ui/posts/generateEditPostForm.js';
 import { logout } from './helpers/auth.js';
+import { initializeProfilePage } from './events/profile/profileHandler.js';
+import {
+  initializeProfileUpdatePage,
+} from './events/profile/updateProfileHandler.js';
 /**
  * Routes to the appropriate handler based on the current URL path
  *
@@ -21,7 +25,7 @@ import { logout } from './helpers/auth.js';
  * });
  */
 function router() {
-  const pathname = window.location.pathname;
+  const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
 
   //event listener to logout button on all pages that have it
   const logoutButton = document.getElementById('logout-button');
@@ -30,6 +34,20 @@ function router() {
       e.preventDefault();
       logout();
     });
+  }
+
+  if (pathname.endsWith('/profile/profileform.html')) {
+    document.addEventListener('DOMContentLoaded', () => {
+      initializeProfileUpdatePage();
+    });
+    return;
+  }
+
+  if (pathname.endsWith('/profile/index.html') || pathname.endsWith('/profile')) {
+    document.addEventListener('DOMContentLoaded', () => {
+      initializeProfilePage();
+    });
+    return;
   }
 
   switch (pathname) {
@@ -56,8 +74,10 @@ function router() {
         initializeEditPostPage();
       });
       break;
-    case '/profile/index.html':
-    case '/profile/':
+    case '/profile':
+      document.addEventListener('DOMContentLoaded', () => {
+        initializeProfilePage();
+      });
       break;
     case '/register/termsofservice.html':
       break;
