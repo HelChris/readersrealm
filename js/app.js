@@ -4,6 +4,10 @@ import { initializeFeedPage } from './helpers/initializationFeedPage.js';
 import { initializeSinglePostPage } from './helpers/initializationSinglePostPage.js';
 import { initializeEditPostPage } from './ui/posts/generateEditPostForm.js';
 import { logout } from './helpers/auth.js';
+import { initializeProfilePage } from './events/profile/profileHandler.js';
+import {
+  initializeProfileUpdatePage,
+} from './events/profile/updateProfileHandler.js';
 /**
  * Routes to the appropriate handler based on the current URL path
  *
@@ -21,7 +25,15 @@ import { logout } from './helpers/auth.js';
  * });
  */
 function router() {
-  const pathname = window.location.pathname;
+  const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
+
+  const runWhenReady = (callback) => {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', callback, { once: true });
+    } else {
+      callback();
+    }
+  };
 
   //event listener to logout button on all pages that have it
   const logoutButton = document.getElementById('logout-button');
@@ -32,6 +44,23 @@ function router() {
     });
   }
 
+  if (pathname.endsWith('/profile/profileform.html')) {
+    document.addEventListener('DOMContentLoaded', () => {
+      initializeProfileUpdatePage();
+    });
+    return;
+  }
+
+  if (pathname.endsWith('/profile/index.html') || pathname.endsWith('/profile')) {
+    runWhenReady(() => initializeProfilePage());
+    return;
+  }
+
+  if (pathname.endsWith('/feed/index.html') || pathname.endsWith('/feed')) {
+    runWhenReady(() => initializeFeedPage());
+    return;
+  }
+
   switch (pathname) {
     case '/':
     case '/index.html':
@@ -40,11 +69,8 @@ function router() {
     case '/register/register.html':
       registerHandler();
       break;
-    case '/feed/index.html':
-    case '/feed/':
-      document.addEventListener('DOMContentLoaded', () => {
-        initializeFeedPage();
-      });
+    case '/feed':
+      runWhenReady(() => initializeFeedPage());
       break;
     case '/feed/post.html':
       document.addEventListener('DOMContentLoaded', () => {
@@ -56,8 +82,10 @@ function router() {
         initializeEditPostPage();
       });
       break;
-    case '/profile/index.html':
-    case '/profile/':
+    case '/profile':
+      document.addEventListener('DOMContentLoaded', () => {
+        initializeProfilePage();
+      });
       break;
     case '/register/termsofservice.html':
       break;

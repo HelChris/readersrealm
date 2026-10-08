@@ -65,7 +65,7 @@ async function handleCreatePostSubmit(form) {
 
     // Reload page after a short delay (to let user see success message)
     setTimeout(() => {
-      window.location.href = '/feed/';
+      window.location.href = './index.html';
     }, 1500);
   } catch (error) {
     console.error('Error creating post:', error);
