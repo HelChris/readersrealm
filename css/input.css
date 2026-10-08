@@ -2,7 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    overflow-y: scroll;
+  }
+}
+
 @layer components {
+  .feed-section {
+  @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
   .active {
     @apply border-b-[0.3rem] border-teal-500;
   }
@@ -21,5 +30,13 @@
   }
   .posts-grid > * {
     @apply min-h-[400px];
+  }
+  .post-card {
+    @apply min-h-[600px];
+  }
+  @media (max-width: 639px) {
+    .post-card {
+      @apply min-h-[660px];
+    }
   }
 }

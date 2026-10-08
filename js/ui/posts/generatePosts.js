@@ -1,4 +1,37 @@
 import { generatePostElement } from '../posts/generatePost.js';
+
+export function showPostSkeletons(count = 3) {
+  const postsList = document.getElementById('postsList');
+  if (!postsList) return;
+
+  postsList.innerHTML = '';
+  postsList.setAttribute('aria-busy', 'true');
+
+  for (let index = 0; index < count; index += 1) {
+    const skeleton = document.createElement('article');
+    skeleton.className =
+      'post-card bg-white p-4 rounded-lg shadow flex flex-col h-full animate-pulse';
+    skeleton.setAttribute('aria-hidden', 'true');
+    skeleton.innerHTML = `
+      <div class="flex items-center mb-3">
+        <div class="w-16 h-16 rounded-full bg-gray-200"></div>
+        <div class="ml-2 space-y-2">
+          <div class="h-4 w-24 rounded bg-gray-200"></div>
+          <div class="h-3 w-16 rounded bg-gray-200"></div>
+        </div>
+      </div>
+      <div class="h-6 w-3/4 rounded bg-gray-200 mb-3"></div>
+      <div class="mb-4 flex-grow">
+        <div class="w-full aspect-square rounded-md bg-gray-200"></div>
+      </div>
+      <div class="h-5 w-20 rounded bg-gray-200 mb-3"></div>
+      <div class="mt-auto pt-3">
+        <div class="h-10 w-full rounded bg-gray-200"></div>
+      </div>
+    `;
+    postsList.appendChild(skeleton);
+  }
+}
 /**
  * Generates and renders post elements in the posts list container
  *
@@ -25,6 +58,7 @@ export function generatePosts(posts) {
   if (!postsList) return;
 
   postsList.innerHTML = '';
+  postsList.setAttribute('aria-busy', 'false');
 
   if (!posts || posts.length === 0) {
     const noPostsMessage = document.createElement('p');
