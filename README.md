@@ -40,11 +40,14 @@ User can delete a post content item
 
 ## Built With
 
-You can list a the tech stack that you've used over here
-
 - Tailwind CSS
 - HTML
 - Vanilla JavaScript
+- JavaScript ES modules
+- Fetch API
+- Web Storage API (`localStorage`)
+- Noroff Social API
+- ESLint
 
 ## Live Site and github project
 
