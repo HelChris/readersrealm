@@ -37,7 +37,8 @@ export function getProfile(username) {
 }
 
 export function updateProfile(profile) {
-  const username = getFromLocalStorage('username');
+  const username =
+    getFromLocalStorage('profileUsername') || getFromLocalStorage('username');
 
   if (!username) {
     throw new Error('Your username could not be found');

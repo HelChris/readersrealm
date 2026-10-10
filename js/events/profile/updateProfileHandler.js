@@ -16,6 +16,7 @@ export function initializeProfileUpdatePage() {
   }
 
   form.reset();
+  form.querySelector('#name').value = getFromLocalStorage('username') || '';
 
   addBookButton.addEventListener('click', () => {
     if (bookInputs.querySelectorAll('input').length < 5) {
@@ -26,6 +27,7 @@ export function initializeProfileUpdatePage() {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const submitButton = form.querySelector('button[type="submit"]');
+    const name = form.querySelector('#name').value.trim();
     const bio = form.querySelector('#bio').value.trim();
     const avatarUrl = form.querySelector('#avatarUrl').value.trim();
     const newBookUrls = [...bookInputs.querySelectorAll('input')]
@@ -34,7 +36,7 @@ export function initializeProfileUpdatePage() {
     const existingBooks = getSavedBooks();
     const bookUrls = [...new Set([...existingBooks, ...newBookUrls])].slice(0, 5);
 
-    const profile = { bio };
+    const profile = { name, bio };
     if (avatarUrl) {
       profile.avatar = { url: avatarUrl, alt: 'Profile avatar' };
     }
@@ -44,6 +46,7 @@ export function initializeProfileUpdatePage() {
 
     try {
       await updateProfile(profile);
+      addToLocalStorage('username', name);
       addToLocalStorage('profileBio', bio);
       addToLocalStorage('profileAvatarUrl', avatarUrl);
       addToLocalStorage('favoriteBooks', JSON.stringify(bookUrls));

@@ -22,12 +22,20 @@ import { showSuccess } from '../../ui/shared/successRegistrationHandling.js';
 export function registerHandler() {
   const form = document.querySelector('#registerForm');
   if (form) {
-    form.addEventListener('submit', validatePassword);
     form.addEventListener('submit', submitForm);
   }
 
   async function submitForm(event) {
     event.preventDefault();
+
+    const message = document.querySelector('#message');
+    if (message) {
+      message.textContent = '';
+    }
+
+    if (!validatePassword()) {
+      return;
+    }
 
     const form = event.target;
     const formData = new FormData(form);

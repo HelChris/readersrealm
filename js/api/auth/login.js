@@ -41,6 +41,7 @@ export async function login(user) {
   const { accessToken, name, email } = json.data;
   addToLocalStorage('accessToken', accessToken);
   addToLocalStorage('username', name);
+  addToLocalStorage('profileUsername', name);
   addToLocalStorage('email', email);
 
   return json;
