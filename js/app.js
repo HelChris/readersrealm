@@ -66,6 +66,7 @@ function router() {
     case '/index.html':
       loginHandler();
       break;
+    case '/register':
     case '/register/register.html':
       registerHandler();
       break;
