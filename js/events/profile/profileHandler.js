@@ -4,6 +4,8 @@ import { generateProfile } from '../../ui/profile/generateProfile.js';
 
 export async function initializeProfilePage() {
   const username = getFromLocalStorage('username');
+  const profileUsername =
+    getFromLocalStorage('profileUsername') || username;
   const container = document.querySelector('#profile-container');
 
   if (!container) {
@@ -24,8 +26,8 @@ export async function initializeProfilePage() {
   generateProfile(fallbackProfile, savedBooks, removeBook);
 
   try {
-    const profile = await getProfile(username);
-    generateProfile(profile, getSavedBooks(), removeBook);
+    const profile = await getProfile(profileUsername);
+    generateProfile({ ...profile, name: username }, getSavedBooks(), removeBook);
   } catch (error) {
     console.error('Unable to load profile:', error);
   }
