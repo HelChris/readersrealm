@@ -28,16 +28,28 @@ export function showError(error, targetSelector) {
   // clear existing content
   targetElement.textContent = '';
 
-  //create alert container
+  // Create alert container
   const alertDiv = document.createElement('div');
-  alertDiv.className = 'alert-error';
+  alertDiv.className = 'alert-error flex items-start gap-3';
   alertDiv.setAttribute('role', 'alert');
 
-  //create error text node
-  const errorText = document.createTextNode(
-    error instanceof Error ? error.message : error
-  );
-  alertDiv.appendChild(errorText);
+  const alertIcon = document.createElement('span');
+  alertIcon.className = 'text-xl leading-none';
+  alertIcon.textContent = '!';
+  alertIcon.setAttribute('aria-hidden', 'true');
+
+  const alertContent = document.createElement('div');
+  const alertTitle = document.createElement('p');
+  alertTitle.className = 'font-semibold';
+  alertTitle.textContent = 'Something went wrong';
+
+  const errorText = document.createElement('p');
+  errorText.textContent = error instanceof Error ? error.message : error;
+
+  alertContent.appendChild(alertTitle);
+  alertContent.appendChild(errorText);
+  alertDiv.appendChild(alertIcon);
+  alertDiv.appendChild(alertContent);
 
   //add to DOM
   targetElement.appendChild(alertDiv);
