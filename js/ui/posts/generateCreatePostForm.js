@@ -53,9 +53,7 @@ export function generateCreatePostForm() {
     createFormGroup('bookAuthor', 'Author (Optional)', 'text', 'Add author?')
   );
   fieldset.appendChild(createRatingSelect());
-  fieldset.appendChild(
-    createFormGroup('coverImage', 'Book Cover Image (Optional)', 'file')
-  );
+  
   fieldset.appendChild(createMediaUrlGroup());
   fieldset.appendChild(createSubmitButton());
 
@@ -160,7 +158,7 @@ function createMediaUrlGroup() {
 
   const mainLabel = document.createElement('label');
   mainLabel.className = 'block text-gray-700';
-  mainLabel.textContent = 'Or provide an image URL';
+  mainLabel.textContent = 'Provide an image URL';
 
   const inputContainer = document.createElement('div');
   inputContainer.className = 'space-y-2';
