@@ -27,6 +27,11 @@ import {
 function router() {
   const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
 
+  if (document.querySelector('#registerForm')) {
+    registerHandler();
+    return;
+  }
+
   const runWhenReady = (callback) => {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', callback, { once: true });
