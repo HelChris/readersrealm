@@ -29,9 +29,16 @@ export function setupSinglePostEventListeners() {
   // Reaction button handler
   const reactionButton = document.querySelector('.reaction-button');
   if (reactionButton) {
-    reactionButton.addEventListener('click', () => {
+    reactionButton.addEventListener('click', async () => {
       const postId = reactionButton.dataset.postId;
-      handleReaction(postId);
+      reactionButton.disabled = true;
+
+      try {
+        const reactionData = await handleReaction(postId);
+        if (reactionData) updateReactionUI(reactionData);
+      } finally {
+        reactionButton.disabled = false;
+      }
     });
   }
 
@@ -49,22 +56,50 @@ export function setupSinglePostEventListeners() {
 async function handleReaction(postId) {
   try {
     const accessToken = getFromLocalStorage('accessToken');
-    const response = await fetch(`${AUTH_ENDPOINTS.posts}/${postId}/react/❤️`, {
+    const reaction = encodeURIComponent('👍');
+    const response = await fetch(
+      `${AUTH_ENDPOINTS.posts}/${postId}/react/${reaction}`,
+      {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
         'X-Noroff-API-Key': NOROFF_API_KEY,
       },
-    });
+      }
+    );
 
-    if (!response.ok) throw new Error('Failed to react to post');
+    if (!response.ok) {
+      const errorBody = await response.json().catch(() => null);
+      const apiMessage = errorBody?.errors?.[0]?.message || errorBody?.message;
+      throw new Error(apiMessage || 'We could not save your reaction.');
+    }
 
-    // Reload the page to show updated reaction count
-    window.location.reload();
+    const json = await response.json().catch(() => null);
+    return json?.data || null;
   } catch (error) {
     console.error('Error handling reaction:', error);
     showError(error, '#post-container');
+    return null;
+  }
+}
+
+function updateReactionUI(reactionData) {
+  const reactionCount = (reactionData.reactions || []).reduce(
+    (total, reaction) => total + reaction.count,
+    0
+  );
+  const likesText = document.querySelector('.likes-count-text');
+  const reactionButton = document.querySelector('.reaction-button');
+  const buttonText = reactionButton?.querySelector('.reaction-button-text');
+
+  if (likesText) {
+    likesText.textContent = `${reactionCount} ${
+      reactionCount === 1 ? 'Like' : 'Likes'
+    }`;
+  }
+
+  if (buttonText) {
+    buttonText.textContent = buttonText.textContent === 'Like' ? 'Liked' : 'Like';
   }
 }
 

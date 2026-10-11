@@ -19,7 +19,7 @@
     @apply text-red-500 mt-2;
   }
   .alert-error {
-    @apply bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded
+    @apply bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg
     shadow-sm m-2;
   }
   .alert-success {
